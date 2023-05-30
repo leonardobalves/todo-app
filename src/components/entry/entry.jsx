@@ -1,4 +1,4 @@
-function Entry({ onDelete }) {
+function Entry({ onUpdate, onDelete }) {
     return <>
     <div className="container">
         <div className="row">
@@ -8,7 +8,7 @@ function Entry({ onDelete }) {
                 </ul>
             </div>
             <div className="col">
-                <button className="btn btn-primary">Edit</button>
+                <button className="btn btn-primary" onClick={onUpdate}>Edit</button>
                 <button className="btn btn-danger" onClick={onDelete}>Delete</button>
             </div>
         </div>
