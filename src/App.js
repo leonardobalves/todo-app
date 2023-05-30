@@ -1,6 +1,8 @@
+import NavBar from "./components/navbar/navbar.jsx";
+
 function App() {
   return (
-    <div>Div</div>
+    <NavBar />
   );
 }
 
