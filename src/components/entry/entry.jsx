@@ -1,10 +1,10 @@
-function Entry({ onUpdate, onDelete }) {
+function Entry({ text, onUpdate, onDelete }) {
     return <>
     <div className="container">
         <div className="row">
             <div className="col">
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item">Entry</li>
+                    <li className="list-group-item">{text}</li>
                 </ul>
             </div>
             <div className="col">
