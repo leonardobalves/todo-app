@@ -1,31 +1,11 @@
-import {  useState } from "react";
+import NavBar from "../../components/navbar/navbar.jsx"
+import Todos from "../../components/todos/todos.jsx";
 
-export default function Dashboard() {
-
-    const [list, setList] = useState([]);
-
-    const handleListClick = () => {
-        const id = list.length + 1;
-        setList((previous) => [...previous, {
-            id: id,
-            text: "Input",
-            completed: false
-        }]);
-    }    
-
+function Dashboard() {
     return <>
-        <div className="container">
-            <ul>
-                {list.map((todo) => {
-                    return <li
-                            completed = {todo.completed}
-                            id={todo.id}
-                            onClick={() => console.log(todo.id)}>
-                                {todo.text}
-                            </li>
-                })}
-            </ul>
-            <button className="btn btn-primary" onClick={() => handleListClick()}>New</button>
-        </div>
+        <NavBar />
+        <Todos />
     </>
 }
+
+export default Dashboard;
