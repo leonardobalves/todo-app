@@ -24,6 +24,16 @@ function Todos() {
         setTodos(updatedTodos);
     }
 
+    function toggleComplete(id) {
+        const updatedTodos = [...todos].map((todo) => {
+            if (todo.id === id) {
+                todo.completed = !todo.completed;
+            }
+            return todo;
+        });
+        setTodos(updatedTodos);
+    }
+
     return <>
     <div className="container">
         <form onSubmit={handleSubmit}>
@@ -33,6 +43,10 @@ function Todos() {
         {todos.map((todo) => <div key={todo.id}>
             <div>{todo.text}</div>
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            <input 
+                type="checkbox"
+                onChange={() => toggleComplete(todo.id)}
+                checked={todo.completed} />
         </div>)}
     </div>
     </>
