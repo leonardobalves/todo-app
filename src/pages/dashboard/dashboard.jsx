@@ -1,32 +1,31 @@
-import { useEffect, useState } from "react";
-import Entry from "../../components/entry/entry";
+import {  useState } from "react";
 
 export default function Dashboard() {
 
-    const [components, setComponents] = useState([]);
+    const [list, setList] = useState([]);
 
-    function addComponent() {
-        setComponents([...components, <Entry text={"teste"} key={components.length} onDelete={deleteComponent}/>]);
-        console.log("log da function add");
-        console.log(components)
-    }
-    
-    useEffect(() => {
-        console.log("log do useEffect")
-        console.log(components);
-    });
-
-    function deleteComponent() {
-        components.map(() => {
-            console.log("log do map")
-            console.log(components);
-        });
-    }
+    const handleListClick = () => {
+        const id = list.length + 1;
+        setList((previous) => [...previous, {
+            id: id,
+            text: "Input",
+            completed: false
+        }]);
+    }    
 
     return <>
         <div className="container">
-            {components}
-            <button className="btn btn-primary" onClick={addComponent}>New</button>
+            <ul>
+                {list.map((todo) => {
+                    return <li
+                            completed = {todo.completed}
+                            id={todo.id}
+                            onClick={() => console.log(todo.id)}>
+                                {todo.text}
+                            </li>
+                })}
+            </ul>
+            <button className="btn btn-primary" onClick={() => handleListClick()}>New</button>
         </div>
     </>
 }
