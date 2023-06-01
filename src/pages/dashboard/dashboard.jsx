@@ -1,42 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Entry from "../../components/entry/entry";
-import NavBar from "../../components/navbar/navbar";
 
-function Dashboard() {
+export default function Dashboard() {
 
-    const [entries, setEntries] = useState([]);
-    const [entryText, setEntryText] = useState('');
+    const [components, setComponents] = useState([]);
 
-    function createEntry() {
-        const entry = {
-            id: entries.length,
-            component: <Entry key={entries.length} text={entryText} onUpdate={updateEntry} onDelete={deleteEntry} />
-        }
-        setEntries([...entries, entry]);
-        setEntryText('');
+    function addComponent() {
+        setComponents([...components, <Entry text={"teste"} key={components.length} onDelete={deleteComponent}/>]);
+        console.log("log da function add");
+        console.log(components)
     }
+    
+    useEffect(() => {
+        console.log("log do useEffect")
+        console.log(components);
+    });
 
-    function deleteEntry() {
-        setEntries(entries.filter(a => a.id !== entries.id))
-    }
-
-    function updateEntry() {
-        //update the entry..
-    }
-
-    const handleInputChange = (event) => {
-        setEntryText(event.target.value);
+    function deleteComponent() {
+        components.map(() => {
+            console.log("log do map")
+            console.log(components);
+        });
     }
 
     return <>
-        <NavBar />
-
         <div className="container">
-            {entries.map((entry) => entry.component)}
-            <input value={entryText} onChange={handleInputChange}></input>
-            <button className="btn btn-primary" onClick={createEntry}>New</button>
+            {components}
+            <button className="btn btn-primary" onClick={addComponent}>New</button>
         </div>
     </>
 }
-
-export default Dashboard;
