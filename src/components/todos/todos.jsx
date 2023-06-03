@@ -45,32 +45,39 @@ function Todos() {
         });
         setTodos(updatedTodos);
         setTodoEditing(null);
+        setEditingText("");
       }
 
     return <>
     <div className="container">
-        <form onSubmit={handleSubmit}>
-            <input type="text" onChange={(e) => setTodo(e.target.value)} value={todo}></input>
-            <button type="submit">Add todo</button>
+        <form onSubmit={handleSubmit} className="form-group m-2">
+            <input type="text" className="form-control m-2" onChange={(e) => setTodo(e.target.value)} value={todo}></input>
+            <button type="submit" className="btn btn-primary m-2">Add todo</button>
         </form>
-        {todos.map((todo) => <div key={todo.id}>
+        {todos.map((todo) => <div className="m-2" key={todo.id}>
             {todoEditing === todo.id ?
                 (<input
+                className="form-control m-2"
                 type="text"
                 onChange={(e) => setEditingText(e.target.value)}
                 value={editingText}
-                />) : (<div>{todo.text}</div>)}
+                />) : (<div className="m-2 h3">{todo.text}</div>)}
 
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            
             <input 
+                className="m-2"
                 type="checkbox"
                 onChange={() => toggleComplete(todo.id)}
-                checked={todo.completed} />
+                checked={todo.completed}
+            /> <span className="h6">Completed</span>
 
-                {todoEditing === todo.id ? (<button onClick={() => editTodo(todo.id)}
-                >Submit Edit</button>) : (<button onClick={() => setTodoEditing(todo.id)}
-                >Edit Todo</button>)}
-                
+                {todoEditing === todo.id ?
+                    (<button className="btn btn-primary m-2" onClick={() => editTodo(todo.id)}
+                    >Submit</button>) :
+                    (<button className="btn btn-warning m-2" onClick={() => setTodoEditing(todo.id)}
+                    >Edit Todo</button>)}
+                    
+            <button className="btn btn-danger m-2" onClick={() => deleteTodo(todo.id)}>Delete</button>
                 
         </div>)}
     </div>
