@@ -4,6 +4,8 @@ function Todos() {
 
     const [todos, setTodos] = useState([]);
     const [todo, setTodo] = useState("");
+    const [todoEditing, setTodoEditing] = React.useState(null);
+    const [editingText, setEditingText] = React.useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -33,6 +35,17 @@ function Todos() {
         });
         setTodos(updatedTodos);
     }
+
+    function submitEdits(id) {
+        const updatedTodos = [...todos].map((todo) => {
+          if (todo.id === id) {
+            todo.text = editingText;
+          }
+          return todo;
+        });
+        setTodos(updatedTodos);
+        setTodoEditing(null);
+      }
 
     return <>
     <div className="container">
