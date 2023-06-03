@@ -4,8 +4,8 @@ function Todos() {
 
     const [todos, setTodos] = useState([]);
     const [todo, setTodo] = useState("");
-    const [todoEditing, setTodoEditing] = React.useState(null);
-    const [editingText, setEditingText] = React.useState("");
+    const [todoEditing, setTodoEditing] = useState(null);
+    const [editingText, setEditingText] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -36,7 +36,7 @@ function Todos() {
         setTodos(updatedTodos);
     }
 
-    function submitEdits(id) {
+    function editTodo(id) {
         const updatedTodos = [...todos].map((todo) => {
           if (todo.id === id) {
             todo.text = editingText;
@@ -54,12 +54,24 @@ function Todos() {
             <button type="submit">Add todo</button>
         </form>
         {todos.map((todo) => <div key={todo.id}>
-            <div>{todo.text}</div>
+            {todoEditing === todo.id ?
+                (<input
+                type="text"
+                onChange={(e) => setEditingText(e.target.value)}
+                value={editingText}
+                />) : (<div>{todo.text}</div>)}
+
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
             <input 
                 type="checkbox"
                 onChange={() => toggleComplete(todo.id)}
                 checked={todo.completed} />
+
+                {todoEditing === todo.id ? (<button onClick={() => editTodo(todo.id)}
+                >Submit Edit</button>) : (<button onClick={() => setTodoEditing(todo.id)}
+                >Edit Todo</button>)}
+                
+                
         </div>)}
     </div>
     </>
